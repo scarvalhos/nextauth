@@ -3,7 +3,7 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 
 import { parseCookies, setCookie, destroyCookie } from 'nookies'
 
-import { api } from "../services/api";
+import { api } from "../services/apiClient";
 
 type User = {
     email: string;
