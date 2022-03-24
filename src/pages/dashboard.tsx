@@ -6,9 +6,14 @@ import { api } from "../services/apiClient";
 import { setUpAPIClient } from "../services/api";
 
 import { withSSRAuth } from "../utils/withSSRAuth"
+import { useCan } from "../hooks/useCan";
 
 export default function Dashboard() {
     const { user } = useContext(AuthContext)
+
+    const userCanSeeMetrics = useCan({
+        roles: ['administrator', 'editor']
+    })
 
     useEffect(() => {
         api.get('/me')
@@ -17,7 +22,10 @@ export default function Dashboard() {
     }, [])
 
     return (
-        <h1>Hello, { user?.email }</h1>
+        <>
+            <h1>Hello, { user?.email }</h1>
+            { userCanSeeMetrics && <div>Metricas</div> }
+        </>
     )
 }
 
